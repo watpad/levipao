@@ -1,4 +1,4 @@
-// ✅ Initialize Firebase (No import/export statements)
+// ✅ Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
     authDomain: "watpad.firebaseapp.com",
@@ -10,21 +10,15 @@ const firebaseConfig = {
     measurementId: "G-VL4S9SQG0P"
 };
 
-// ✅ Initialize Firebase App
+// ✅ Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// 🔄 Function to Retrieve and Update Data
+// 🔄 Function to Retrieve and Update Data **IN REAL-TIME**
 function getLatestData() {
-    database.ref().orderByChild("timestamp").limitToLast(1).on("value", (snapshot) => {
-        console.log("📡 Firebase Data:", snapshot.val());
-        const data = snapshot.val();
-        if (data) {
-            const latestKey = Object.keys(data)[0]; // Get latest entry key
-            updateUI(data[latestKey]); // Pass latest entry
-        } else {
-            console.warn("⚠ No data retrieved.");
-        }
+    database.ref().orderByChild("timestamp").limitToLast(1).on("child_added", (snapshot) => {
+        console.log("📡 Firebase Data Received:", snapshot.val());
+        updateUI(snapshot.val());
     }, (error) => {
         console.error("❌ Firebase Error:", error);
     });
@@ -32,6 +26,8 @@ function getLatestData() {
 
 // 📌 Function to Update the Webpage UI
 function updateUI(data) {
+    if (!data) return;
+
     console.log("📡 Updating UI with:", data);
 
     document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
