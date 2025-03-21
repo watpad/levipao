@@ -1,6 +1,7 @@
-// Firebase Configuration
+
+// 🔹 Replace with your actual Firebase config
 const firebaseConfig = {
-    	apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
+    apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
 	authDomain: "watpad.firebaseapp.com",
 	databaseURL: "https://watpad-default-rtdb.asia-southeast1.firebasedatabase.app/",
 	projectId: "watpad",
@@ -12,17 +13,29 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 
-// Fetch data from Firebase
-function fetchLatestDetection() {
-    db.ref("/").orderByChild("timestamp").limitToLast(1).on("child_added", (snapshot) => {
+// Reference Firebase Database
+const database = firebase.database();
+
+// Function to fetch the latest detection data
+function getLatestData() {
+    database.ref().orderByChild("timestamp").limitToLast(1).on("child_added", (snapshot) => {
         const data = snapshot.val();
-        document.getElementById("coliformImage").src = data.image_url;
+        
+        // Set image URL
+        document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
+
+        // Set bacteria counts
         document.getElementById("ecoliCount").textContent = data.e_coli_count;
         document.getElementById("coliformCount").textContent = data.coliform_count;
-        document.getElementById("potability").textContent = data.potable ? "Safe to Drink" : "Not Safe";
+        document.getElementById("totalCount").textContent = data.e_coli_count + data.coliform_count;
+
+        // Set potability status
+        const statusElement = document.getElementById("potabilityStatus");
+        statusElement.textContent = data.potable ? "Safe ✅" : "Unsafe ❌";
+        statusElement.className = data.potable ? "status safe" : "status unsafe";
     });
 }
 
-fetchLatestDetection();
+// Call function to get latest data
+getLatestData();
