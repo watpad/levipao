@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coliform Detector</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Water Quality Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .status {
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px;
+            color: white;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        .safe { background-color: green; }
+        .unsafe { background-color: red; }
+    </style>
 </head>
 <body>
-    <h1>Coliform & E. coli Detection</h1>
-    <img id="coliformImage" src="" alt="Detection Result">
-    <p><strong>E. coli Count:</strong> <span id="ecoliCount">0</span></p>
-    <p><strong>Coliform Count:</strong> <span id="coliformCount">0</span></p>
-    <p><strong>Potability:</strong> <span id="potability">Unknown</span></p>
-    
+
+    <h1>Water Quality Monitor</h1>
+    <p>Latest Detection Data</p>
+
+    <img id="bacteriaImage" src="" alt="Detected Bacteria Image">
+    <p><strong>E. coli Count:</strong> <span id="ecoliCount">-</span></p>
+    <p><strong>Coliform Count:</strong> <span id="coliformCount">-</span></p>
+    <p><strong>Total Count:</strong> <span id="totalCount">-</span></p>
+    <p><strong>Water Potability:</strong> <span id="potabilityStatus" class="status">-</span></p>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+
+    <!-- App Logic -->
     <script src="app.js"></script>
+
 </body>
 </html>
