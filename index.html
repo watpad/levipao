@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Quality Monitor</title>
+    <title>E. coli & Coliform Detector</title>
+    <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+    <script defer src="app.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        img { max-width: 80%; height: auto; margin-top: 10px; }
-        .status { font-size: 1.2em; font-weight: bold; padding: 10px; color: white; border-radius: 5px; display: inline-block; }
-        .safe { background-color: green; }
-        .unsafe { background-color: red; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .status {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .safe {
+            color: green;
+        }
+        .unsafe {
+            color: red;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Water Quality Monitor</h1>
-    <p>Latest Detection Data</p>
-
-    <img id="bacteriaImage" src="placeholder.jpg" alt="Detected Bacteria Image">
-    <p><strong>E. coli Count:</strong> <span id="ecoliCount">-</span></p>
-    <p><strong>Coliform Count:</strong> <span id="coliformCount">-</span></p>
-    <p><strong>Total Count:</strong> <span id="totalCount">-</span></p>
-    <p><strong>Water Potability:</strong> <span id="potabilityStatus" class="status">-</span></p>
-
-    <!-- ✅ Firebase SDK (Compatibility Mode) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-
-    <!-- ✅ Load App Logic -->
-    <script src="app.js"></script>
+    <h2>E. coli & Coliform Detector</h2>
+    <div class="container">
+        <img id="bacteriaImage" src="placeholder.jpg" alt="Bacteria Image">
+        <p><strong>E. coli Count:</strong> <span id="ecoliCount">N/A</span></p>
+        <p><strong>Coliform Count:</strong> <span id="coliformCount">N/A</span></p>
+        <p><strong>Total Bacteria:</strong> <span id="totalCount">N/A</span></p>
+        <p class="status" id="potabilityStatus">Checking...</p>
+    </div>
 
 </body>
 </html>
