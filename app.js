@@ -1,14 +1,12 @@
-
-// 🔹 Replace with your actual Firebase config
+// Replace with your actual Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
-	authDomain: "watpad.firebaseapp.com",
-	databaseURL: "https://watpad-default-rtdb.asia-southeast1.firebasedatabase.app/",
-	projectId: "watpad",
-	storageBucket: "watpad.firebasestorage.app",
-	messagingSenderId: "664783349089",
-	appId: "1:664783349089:web:7b28efdc2d9d062dddd120",
-	measurementId: "G-VL4S9SQG0P"
+    authDomain: "watpad.firebaseapp.com",
+    databaseURL: "https://watpad-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    projectId: "watpad",
+    storageBucket: "watpad.firebasestorage.app",
+    messagingSenderId: "664783349089",
+    appId: "1:664783349089:web:7b28efdc2d9d062dddd120",
 };
 
 // Initialize Firebase
