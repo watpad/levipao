@@ -59,3 +59,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Start fetching data
     getLatestData();
 });
+
+function getLatestData() {
+    database.ref().orderByChild("timestamp").limitToLast(1).on("value", (snapshot) => {
+        console.log("📡 Raw Firebase Snapshot:", snapshot.val());
+        const data = snapshot.val();
+        if (data) {
+            const latestKey = Object.keys(data)[0];  // Get latest entry key
+            console.log("📡 Latest Data Entry:", data[latestKey]); // Log latest entry
+            updateUI(data[latestKey]); // Pass latest entry
+        } else {
+            console.warn("⚠ No data retrieved.");
+        }
+    }, (error) => {
+        console.error("❌ Firebase Error:", error);
+    });
+}
+
