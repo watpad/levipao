@@ -12,7 +12,7 @@
 
 };
 
-// ✅ Initialize Firebase in Compatibility Mode
+// ✅ Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 // ✅ Get a reference to the database
@@ -25,19 +25,30 @@ function getLatestData() {
         console.log("📡 Received Data:", data); // Debugging
 
         if (data) {
-            // Set image URL
-            const placeholderImage = "https://aclmaringa.com.br/wp-content/uploads/2021/06/Placa_EC.jpg";
-            document.getElementById("bacteriaImage").src = placeholderImage;
-
-            // Set bacteria counts
-            document.getElementById("ecoliCount").textContent = data.e_coli_count ?? "-";
-            document.getElementById("coliformCount").textContent = data.coliform_count ?? "-";
-            document.getElementById("totalCount").textContent = (data.e_coli_count ?? 0) + (data.coliform_count ?? 0);
-
-            // Set potability status
+            // ✅ Get elements
+            const imgElement = document.getElementById("bacteriaImage");
+            const ecoliElement = document.getElementById("ecoliCount");
+            const coliformElement = document.getElementById("coliformCount");
+            const totalElement = document.getElementById("totalCount");
             const statusElement = document.getElementById("potabilityStatus");
+
+            // ✅ Update image (Check if URL is valid)
+            if (data.image_url) {
+                imgElement.src = data.image_url;
+            } else {
+                imgElement.src = "placeholder.jpg"; // Fallback image
+            }
+
+            // ✅ Update text content
+            ecoliElement.textContent = data.e_coli_count ?? "N/A";
+            coliformElement.textContent = data.coliform_count ?? "N/A";
+            totalElement.textContent = (data.e_coli_count ?? 0) + (data.coliform_count ?? 0);
+
+            // ✅ Update potability status with proper class
             statusElement.textContent = data.potable ? "Safe ✅" : "Unsafe ❌";
             statusElement.className = data.potable ? "status safe" : "status unsafe";
+
+            console.log("✅ Webpage Updated Successfully!");
         }
     }, (error) => {
         console.error("❌ Firebase Error:", error);
@@ -45,4 +56,5 @@ function getLatestData() {
 }
 
 // ✅ Call function to get the latest data
+getLatestData();
 getLatestData();
