@@ -2,6 +2,7 @@
 const firebaseConfig = {
     	apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
 	authDomain: "watpad.firebaseapp.com",
+	databaseURL: "https://watpad-default-rtdb.asia-southeast1.firebasedatabase.app/",
 	projectId: "watpad",
 	storageBucket: "watpad.firebasestorage.app",
 	messagingSenderId: "664783349089",
