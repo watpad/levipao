@@ -1,5 +1,5 @@
 // Replace with your actual Firebase config
-
+ 
   const firebaseConfig = {
   apiKey: "AIzaSyBGPqzH7H2tBvuCoIDJcmq9ZxoGkPL1R10",
   authDomain: "watpad.firebaseapp.com",
