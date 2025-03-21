@@ -9,17 +9,17 @@ const firebaseConfig = {
     appId: "1:664783349089:web:7b28efdc2d9d062dddd120",
 };
 
-// Initialize Firebase
+// ✅ Initialize Firebase (Legacy Mode)
 firebase.initializeApp(firebaseConfig);
 
-// Reference Firebase Database
+// ✅ Get a reference to the database
 const database = firebase.database();
 
-// Function to fetch the latest detection data
+// ✅ Fetch the latest detection data
 function getLatestData() {
     database.ref().orderByChild("timestamp").limitToLast(1).on("child_added", (snapshot) => {
         const data = snapshot.val();
-        
+
         // Set image URL
         document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
 
@@ -35,5 +35,5 @@ function getLatestData() {
     });
 }
 
-// Call function to get latest data
+// ✅ Call function to get the latest data
 getLatestData();
