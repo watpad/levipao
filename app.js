@@ -12,29 +12,34 @@
 
 };
 
-// ✅ Initialize Firebase (Legacy Mode)
+// ✅ Initialize Firebase in Compatibility Mode
 firebase.initializeApp(firebaseConfig);
 
 // ✅ Get a reference to the database
 const database = firebase.database();
 
-// ✅ Fetch the latest detection data
+// ✅ Function to fetch the latest data from Firebase
 function getLatestData() {
     database.ref().orderByChild("timestamp").limitToLast(1).on("child_added", (snapshot) => {
         const data = snapshot.val();
+        console.log("📡 Received Data:", data); // Debugging
 
-        // Set image URL
-        document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
+        if (data) {
+            // Set image URL
+            document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
 
-        // Set bacteria counts
-        document.getElementById("ecoliCount").textContent = data.e_coli_count;
-        document.getElementById("coliformCount").textContent = data.coliform_count;
-        document.getElementById("totalCount").textContent = data.e_coli_count + data.coliform_count;
+            // Set bacteria counts
+            document.getElementById("ecoliCount").textContent = data.e_coli_count ?? "-";
+            document.getElementById("coliformCount").textContent = data.coliform_count ?? "-";
+            document.getElementById("totalCount").textContent = (data.e_coli_count ?? 0) + (data.coliform_count ?? 0);
 
-        // Set potability status
-        const statusElement = document.getElementById("potabilityStatus");
-        statusElement.textContent = data.potable ? "Safe ✅" : "Unsafe ❌";
-        statusElement.className = data.potable ? "status safe" : "status unsafe";
+            // Set potability status
+            const statusElement = document.getElementById("potabilityStatus");
+            statusElement.textContent = data.potable ? "Safe ✅" : "Unsafe ❌";
+            statusElement.className = data.potable ? "status safe" : "status unsafe";
+        }
+    }, (error) => {
+        console.error("❌ Firebase Error:", error);
     });
 }
 
