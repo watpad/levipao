@@ -26,7 +26,8 @@ function getLatestData() {
 
         if (data) {
             // Set image URL
-            document.getElementById("bacteriaImage").src = data.image_url || "placeholder.jpg";
+            const placeholderImage = "https://aclmaringa.com.br/wp-content/uploads/2021/06/Placa_EC.jpg";
+            document.getElementById("bacteriaImage").src = placeholderImage;
 
             // Set bacteria counts
             document.getElementById("ecoliCount").textContent = data.e_coli_count ?? "-";
